@@ -12,7 +12,8 @@
     "b4caa92c-540a-4bf5-bdf8-a7d6fa98942f": 9,
     "46832ad8-3a19-4e63-bc4a-a7b3346ef6bc": 10,
     "7fb0f30b-f090-415f-83ab-132a5a3c12df": 11,
-    "0ac45ffe-2e04-4d8f-8107-5c448cc46583": 12
+    "0ac45ffe-2e04-4d8f-8107-5c448cc46583": 12,
+    "007cc3f5-ce10-4c17-ab7b-ff082f5cf8f5": 13
   },
   "rows": [
     {
@@ -79,6 +80,11 @@
       "start": 1791818880000,
       "finish": 1791819000000,
       "description": "Reviewed story 02 (inline history chart): no must-fix; added a deviation note for the lint-forced spike edit; marked done"
+    },
+    {
+      "start": 1791819180000,
+      "finish": 1791819240000,
+      "description": "Wrote story 03 (as-at-draw range bands) and set it ready"
     }
   ]
 }

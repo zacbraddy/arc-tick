@@ -21,3 +21,4 @@ Times are captured automatically from the system clock: start times round up to 
 | 11 | 2026-10-12 | 16:08 | 16:14 | 6 | 38 | Wrote story 02 (inline history chart): ACs, test plan, impl notes, manual guide; set ready |
 | 12 | 2026-10-12 | 16:17 | 16:26 | 9 | 47 | Story 02 implemented: inline History chart (toggle, lazy fetch, Chart.js line, empty/error/CDN states); manual Guide passed, edge cases skipped (no data) |
 | 13 | 2026-10-12 | 16:28 | 16:30 | 2 | 49 | Reviewed story 02 (inline history chart): no must-fix; added a deviation note for the lint-forced spike edit; marked done |
+| 14 | 2026-10-12 | 16:33 | 16:34 | 1 | 50 | Wrote story 03 (as-at-draw range bands) and set it ready |
