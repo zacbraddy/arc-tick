@@ -24,3 +24,4 @@ Times are captured automatically from the system clock: start times round up to 
 | 14 | 2026-10-12 | 16:33 | 16:34 | 1 | 50 | Wrote story 03 (as-at-draw range bands) and set it ready |
 | 15 | 2026-10-12 | 16:38 | 16:50 | 12 | 62 | Story 03 implemented: as-at-draw stepped range bands, y-extent, optimal tooltip, x-axis right padding; all 8 Guide steps passed |
 | 16 | 2026-10-12 | 16:53 | 16:54 | 1 | 63 | Reviewed story 03 (as-at-draw range bands): clean, fixed 2 nits, marked done |
+| 17 | 2026-10-12 | 16:56 | 17:02 | 6 | 69 | Wrote story 04 (home re-bench + NOTES.md); skipped rest of story 05, flagged for retro |

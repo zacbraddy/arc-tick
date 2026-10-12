@@ -15,7 +15,8 @@
     "0ac45ffe-2e04-4d8f-8107-5c448cc46583": 12,
     "007cc3f5-ce10-4c17-ab7b-ff082f5cf8f5": 13,
     "c882e40c-6558-41d4-b47b-ecad629d1df4": 14,
-    "784c1a65-ebc2-48bb-9086-cfb17579a68e": 15
+    "784c1a65-ebc2-48bb-9086-cfb17579a68e": 15,
+    "ae78e92f-276f-4d49-9d50-bf55e6d1ec6c": 16
   },
   "rows": [
     {
@@ -97,6 +98,11 @@
       "start": 1791820380000,
       "finish": 1791820440000,
       "description": "Reviewed story 03 (as-at-draw range bands): clean, fixed 2 nits, marked done"
+    },
+    {
+      "start": 1791820560000,
+      "finish": 1791820920000,
+      "description": "Wrote story 04 (home re-bench + NOTES.md); skipped rest of story 05, flagged for retro"
     }
   ]
 }

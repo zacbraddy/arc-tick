@@ -115,10 +115,11 @@
   {
     "title": "NOTES.md",
     "path": "project-context/execution/biomarker-history/stories/04-notes-md.md",
-    "shortDescription": "Task 1's required note of assumptions, edge-case guards and known limitations",
+    "shortDescription": "Re-bench /api/home against the 35 ms budget, then write the submission's NOTES.md (assumptions, storage, left out, AI usage)",
     "tags": [
       "biomarkers",
-      "constraints"
+      "constraints",
+      "performance"
     ]
   },
   {

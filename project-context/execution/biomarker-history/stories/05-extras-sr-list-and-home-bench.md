@@ -10,12 +10,13 @@ dependsOn: [02]
 ## Summary
 Optional. Only do this if the time-box allows after 01–04.
 
+**Skipped**: the hour ran out after story 04. The home re-bench moved into [story 04](04-notes-md.md); the screen-reader list and the band pinning remain. At retro, move this story's content back into the workflow as an idea or shaping item so a future run can pick it up.
+
 ## Outcome
-Each history panel includes a visually hidden list of the same points (date, value, unit, status) for screen readers. A bench run shows `/api/home` p95 is unchanged and within 35 ms (k4).
+Each history panel includes a visually hidden list of the same points (date, value, unit, status) for screen readers.
 
 ## Scope
 - About 5 lines in `loadHistory` plus a visually hidden style.
-- Re-run the existing bench spike against home.
 - Optional: pin one-sided bands to the axis edge.
 
 ## Links
