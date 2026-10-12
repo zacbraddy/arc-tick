@@ -29,17 +29,17 @@ C4Context
 C4Container
   Person(member, "Member")
   Container(client, "Browser client", "HTML/CSS/vanilla JS, no build", "app/static/: sign-in, dashboard, Chart.js charts, perf panel")
-  Container(api, "API", "Python 3.14, FastAPI, uvicorn", "app/main.py + app/routes/: auth, home, ingest")
+  Container(api, "API", "Python 3.14, FastAPI, uvicorn", "app/main.py + app/routes/: auth, home, history, ingest")
   ContainerDb(db, "Document store", "SQLite dev.db via app/store.py", "pk/sk documents, no indexes")
   Rel(member, client, "Uses")
-  Rel(client, api, "GET /api/me, /api/home; POST /api/auth/*", "same-origin JSON")
+  Rel(client, api, "GET /api/me, /api/home, /api/biomarkers/{id}/history (lazy, on chart open); POST /api/auth/*", "same-origin JSON")
   Rel(api, db, "Store.get/query/keys/scan/put/put_many/delete")
 ```
 
 | Container | Notes | Evidence |
 | --- | --- | --- |
-| API | Routers: `auth` (login/logout/me), `home` (`/api/home`, `/api/biomarkers`), `ingest` (`/api/users/{user_id}/…`). Every response is `{"data", "meta"}` with snake_case fields. Timing middleware sets `X-Response-Time-Ms` | `app/main.py`, `app/routes/`, `app/models.py:12`, `app/timing.py` |
-| Browser client | Served at `/` and `/static/`; one process, one port, no CORS. Calls `/api/me` on load, then `/api/home`, and renders results grouped by category. `perf.js` wraps `fetch` for a request-timing panel and holds the Chart.js example | `app/static/app.js`, `app/static/perf.js`, `app/static/index.html:41` |
+| API | Routers: `auth` (login/logout/me), `home` (`/api/home`, `/api/biomarkers`), `history` (`/api/biomarkers/{id}/history`, [ADR-0003](/project-context/10k/technical/adrs/0003-per-series-history-endpoint.md)), `ingest` (`/api/users/{user_id}/…`). Every response is `{"data", "meta"}` with snake_case fields. Timing middleware sets `X-Response-Time-Ms` | `app/main.py`, `app/routes/`, `app/models.py:12`, `app/timing.py` |
+| Browser client | Served at `/` and `/static/`; one process, one port, no CORS. Calls `/api/me` on load, then `/api/home`, and renders results grouped by category. Each marker card has a "History" toggle that expands an inline Chart.js history chart with as-at-draw bands ([ADR-0004](/project-context/10k/technical/adrs/0004-charts-use-as-at-draw-ranges.md)). `perf.js` wraps `fetch` for a request-timing panel and holds the Chart.js example | `app/static/app.js`, `app/static/perf.js`, `app/static/index.html:41` |
 | Document store | One SQLite table `documents(pk, sk, value)`, opened per request via `Depends(get_store)`. Every call logs at INFO, which is the way to see access patterns | `app/store.py` |
 
 ## Related
@@ -47,3 +47,5 @@ C4Container
 - [Project structure](/project-context/10k/technical/project-structure.md)
 - [ADR-0001: Partitioned document store](/project-context/10k/technical/adrs/0001-partitioned-document-store.md)
 - [ADR-0002: Draw results keep as-at-draw ranges](/project-context/10k/technical/adrs/0002-draw-results-keep-as-at-draw-ranges.md)
+- [ADR-0003: Per-series history endpoint](/project-context/10k/technical/adrs/0003-per-series-history-endpoint.md)
+- [ADR-0004: Charts use as-at-draw ranges](/project-context/10k/technical/adrs/0004-charts-use-as-at-draw-ranges.md)

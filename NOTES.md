@@ -8,7 +8,7 @@ Hello 👋 Here's the short version. Task 1 (biomarker history) is done: there's
 
 The brief left a few things open. Below is what I picked and why. The first one shaped everything else, so it gets the most words.
 
-- **History has its own endpoint, and `/api/home` is untouched.** The obvious move was to put history into the home payload. I benched that before committing to it. With one member padded to 50 draws, inlining every biomarker's history pushed `/api/home` to **55 ms** p95, well over the 35 ms budget 😬. With a separate endpoint, home stayed at **3.5 ms** and the history endpoint took **10.5 ms**. The separate endpoint is also the shape Task 2's wearable data would want, so the choice pays twice.
+- **History has its own endpoint, and `/api/home` is untouched.** The obvious move was to put history into the home payload. I benched that before committing to it. With one member padded to 50 draws, inlining every biomarker's history pushed `/api/home` to **55 ms** p95, well over the 35 ms budget 😬. With a separate endpoint, home stayed at **3.5 ms** and the history endpoint took **10.5 ms**. It also keeps home's headroom free for Task 2, whose wearable charts must be served through `/api/home` within the same budget.
 - **Each point is plotted against the reference ranges from its own draw, not today's.** Labs revise their ranges over time, and in the seed data ranges drift between draws for 6 of 30 biomarkers. Each result already stores the ranges that applied when it was drawn ([ADR 0002: draw results keep as-at-draw ranges](project-context/10k/technical/adrs/0002-draw-results-keep-as-at-draw-ranges.md)). So the chart's coloured bands step at each draw date instead of using the catalogue's current ranges, and the tooltip shows that draw's optimal range.
 - **Each point's status (optimal / good / improve) is the status stored with it.** It isn't recalculated against later ranges, because that would rewrite what the member was told at the time.
 - **Units aren't converted.** In the seed data each biomarker has one unit per member. Each point carries its own unit, and the tooltip shows it.
@@ -40,7 +40,7 @@ Nothing new was added to the store. History reuses the partition the draws alrea
 
 - History reads the member's whole `results:{member_id}` partition (one document per draw) and filters it in Python. That's cheap at the seed's 2–6 draws per member. The spike puts it at about 35 ms around 200 draws.
 - `/api/home` doesn't change, so its 35 ms budget is protected however long a member's history grows.
-- **Risk for Task 2:** if wearable data were written into the same `results:{member_id}` partition, every history read would pay to scan it. The plan is to give it its own partition (e.g. `wearables:{member_id}`) and reuse the per-series endpoint pattern.
+- **Risk for Task 2:** if wearable data were written into the same `results:{member_id}` partition, every history read would pay to scan it. The plan is to give it its own partition (e.g. `wearables:{member_id}`). Task 2 requires its chart data inside `/api/home`, so the 30-day series has to be sized against home's budget, at roughly 1 ms per document read there.
 
 To prove `/api/home` didn't regress, here's a fresh bench after the build (`scripts/bench.py --n 200`, seed `dev.db`). Comfortably under budget all round 🟢:
 
@@ -57,7 +57,7 @@ For comparison, `/api/biomarkers/vitamin_d/history` (james.chen, serial) came in
 
 The hour is a hard wall ⏰, and I'd rather hand over something that works end to end than something wider and wobbly. Here's what didn't make the cut, roughly in the order I'd pick it up:
 
-- **Task 2 (wearables): not started.** Task 1 took the hour. Next would be shaping it around a separate partition and a per-series endpoint, as above.
+- **Task 2 (wearables): not started.** Task 1 took the hour. Next would be shaping it around a separate partition, with a 30-day series small enough to sit inside `/api/home`'s budget, as above.
 - **Accessibility and polish extras: skipped to fit the time-box.** These were a screen-reader list as an alternative to the chart and pinning one-sided bands to the chart edge. Landing working core slices inside the hour came first.
 - **No JS test harness.** The single-point, no-points and unit-change UI cases were checked by reading the code only.
 - **No unit conversion.**
@@ -77,5 +77,20 @@ If you're interested at all in what my framework looks like it's all checked in 
 - Subagents gathered project context, checked whether each stage was ready to move on, and reviewed each implemented story.
 - Implementation was test-first: a failing pytest came before each API behaviour.
 - I reviewed, iterated on and committed every story myself. I also made the scope calls, including dropping the extras to land working slices inside the hour.
+
+## Further reading 📚
+
+This file is the short version. For more detail on the decisions behind this work, what they cost and how the codebase and project are laid out, see the curated docs in `project-context/10k/`, which hold the project's current truth:
+
+| Doc | What's in it |
+| --- | --- |
+| [Business constraints](project-context/10k/business-constraints.md) | The rules from the brief: the time-box, the frozen store API, the 35 ms p95 budget on `/api/home` and what may not change |
+| [Biomarker history (product)](project-context/10k/product/biomarker-history.md) | What members get from the history chart, what the member data looks like, and the known gaps |
+| [C4 context and containers](project-context/10k/technical/architecture/c4-context-containers.md) | Who uses the system, the external systems that feed it, and its single-process API, client and store shape |
+| [Project structure](project-context/10k/technical/project-structure.md) | Where everything lives, which module owns what, and how to run, test, lint and benchmark |
+| [ADR-0001: Partitioned document store](project-context/10k/technical/adrs/0001-partitioned-document-store.md) | The store's frozen API, the key layout, and which reads are cheap or expensive |
+| [ADR-0002: Draw results keep as-at-draw ranges](project-context/10k/technical/adrs/0002-draw-results-keep-as-at-draw-ranges.md) | Why each result keeps the ranges and status it had when drawn |
+| [ADR-0003: Per-series history endpoint](project-context/10k/technical/adrs/0003-per-series-history-endpoint.md) | Why history has its own lazy endpoint and `/api/home` stays lean, with the bench numbers |
+| [ADR-0004: Charts use as-at-draw ranges](project-context/10k/technical/adrs/0004-charts-use-as-at-draw-ranges.md) | Why each point is plotted against its own draw's stepped bands |
 
 Thanks for reading 🙌

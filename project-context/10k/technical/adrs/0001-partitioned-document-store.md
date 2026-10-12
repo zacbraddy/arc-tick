@@ -26,7 +26,7 @@ All application data lives in `Store` (`app/store.py`), a DynamoDB-style partiti
 
 ## Consequences
 - **Cheap:** one member's draws in time order (`query`/`keys` on `results:{id}`), the latest draw (last key), and all definitions (one small partition).
-- **Expensive:** anything across members (`scan`), and "history of one biomarker", which means reading every draw doc for the member and picking out one result from each.
+- **Expensive:** anything across members (`scan`), and "history of one biomarker", which means reading every draw doc for the member and picking out one result from each. Measured at about 0.17 ms per draw, so roughly 35 ms at 200 draws; see [ADR-0003](/project-context/10k/technical/adrs/0003-per-series-history-endpoint.md).
 - Per-member partitions give member isolation by construction. Every user-scoped read must build its pk from the signed-in member's ID.
 - Sort keys must sort chronologically as strings, so use zero-padded ISO dates/timestamps in one consistent format.
 - New data (wearables) means choosing pk/sk for the home-screen read pattern, and `NOTES.md` must explain that choice.
@@ -35,3 +35,4 @@ All application data lives in `Store` (`app/store.py`), a DynamoDB-style partiti
 - [Business constraints](/project-context/10k/business-constraints.md)
 - [C4 context and containers](/project-context/10k/technical/architecture/c4-context-containers.md)
 - [ADR-0002: Draw results keep as-at-draw ranges](/project-context/10k/technical/adrs/0002-draw-results-keep-as-at-draw-ranges.md)
+- [ADR-0003: Per-series history endpoint](/project-context/10k/technical/adrs/0003-per-series-history-endpoint.md)

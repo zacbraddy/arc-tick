@@ -150,6 +150,10 @@
     {
       "date": "2026-10-12",
       "event": "decided: A failed history fetch (network, 401, 404) shows the api() error message inline in the panel, and the next open retries"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "moved execution → retro"
     }
   ],
   "type": "technical"

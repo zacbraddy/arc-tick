@@ -27,3 +27,4 @@ Times are captured automatically from the system clock: start times round up to 
 | 17 | 2026-10-12 | 16:56 | 17:02 | 6 | 69 | Wrote story 04 (home re-bench + NOTES.md); skipped rest of story 05, flagged for retro |
 | 18 | 2026-10-12 | 17:04 | 17:15 | 11 | 80 | Story 04: re-benched /api/home (all members p95 ≤3.4 ms) and wrote NOTES.md |
 | 19 | 2026-10-12 | 17:29 | 17:31 | 2 | 82 | Reviewed story 04 (NOTES.md), fixed AI-usage typos and archive tense, marked done |
+| 20 | 2026-10-12 | 17:33 | 17:46 | 13 | 95 | Retro biomarker-history: ADR-0003/0004, 10k C4/structure/product updates, follow-ups to raw/ |

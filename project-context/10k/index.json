@@ -9,6 +9,15 @@
     ]
   },
   {
+    "title": "Biomarker history",
+    "path": "project-context/10k/product/biomarker-history.md",
+    "shortDescription": "What members get from the biomarker history chart, what their data looks like, and the known gaps (screen-reader equivalent, one-sided bands, unit changes).",
+    "tags": [
+      "biomarkers",
+      "constraints"
+    ]
+  },
+  {
     "title": "ADR-0001: Partitioned document store is the only persistence",
     "path": "project-context/10k/technical/adrs/0001-partitioned-document-store.md",
     "shortDescription": "All persistence goes through Store's frozen pk/sk API with no indexes; documents the current key layout and what it makes cheap or expensive.",
@@ -25,6 +34,26 @@
     "tags": [
       "biomarkers",
       "data-store"
+    ]
+  },
+  {
+    "title": "ADR-0003: Biomarker history is fetched on demand from its own endpoint",
+    "path": "project-context/10k/technical/adrs/0003-per-series-history-endpoint.md",
+    "shortDescription": "GET /api/biomarkers/{id}/history serves one biomarker's history lazily; /api/home carries only latest values. Includes the measured per-draw cost of growing home.",
+    "tags": [
+      "architecture",
+      "performance",
+      "biomarkers",
+      "data-store"
+    ]
+  },
+  {
+    "title": "ADR-0004: History charts plot each point against its own as-at-draw ranges",
+    "path": "project-context/10k/technical/adrs/0004-charts-use-as-at-draw-ranges.md",
+    "shortDescription": "Biomarker history charts draw stepped reference bands from each draw's stored ranges and show stored status; nothing is reclassified against the current catalogue.",
+    "tags": [
+      "biomarkers",
+      "architecture"
     ]
   },
   {
