@@ -12,3 +12,4 @@ Times are captured automatically from the system clock: start times round up to 
 | 2 | 2026-10-12 | 14:38 | 14:42 | 4 | 13 | ideate: fast-tracked TASK_1 to shaping/biomarker-history with 5 unknowns + 4 knowns, deleted raw |
 | 3 | 2026-10-12 | 15:03 | 15:07 | 4 | 17 | Shaped biomarker-history: benched API options, chose per-biomarker history endpoint, gated ready-for-planning |
 | 4 | 2026-10-12 | 15:14 | 15:17 | 3 | 20 | plan-epic: created technical epic biomarker-history, merged shaping item, reordered planning unknowns |
+| 5 | 2026-10-12 | 15:20 | 15:26 | 6 | 26 | plan-epic: data survey + edge-case table (u2/u4), chose inline-expand chart and 3-slice build (u1/u3), wrote plan.md |

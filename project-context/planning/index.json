@@ -1,5 +1,13 @@
 [
   {
+    "title": "Biomarker data survey",
+    "path": "project-context/planning/biomarker-history/data-survey.md",
+    "shortDescription": "What data/biomarkers actually contains for history charts — range drift across draws and which edge cases are real",
+    "tags": [
+      "biomarkers"
+    ]
+  },
+  {
     "title": "History API shape bake-off",
     "path": "project-context/planning/biomarker-history/origins/biomarker-history/shaping-content/history-api-shape.md",
     "shortDescription": "u2 answer. A per-biomarker history endpoint beats inlining history in /api/home, which goes over the 35 ms budget at 50 draws",
@@ -15,6 +23,17 @@
     "shortDescription": "Throwaway bake-off of /api/home with inline history against a per-biomarker history endpoint",
     "tags": [
       "biomarkers",
+      "performance"
+    ]
+  },
+  {
+    "title": "Biomarker history plan",
+    "path": "project-context/planning/biomarker-history/plan.md",
+    "shortDescription": "Scope, thin vertical slices, test strategy, risks and candidate ADRs for Task 1's biomarker history chart",
+    "tags": [
+      "biomarkers",
+      "architecture",
+      "constraints",
       "performance"
     ]
   },

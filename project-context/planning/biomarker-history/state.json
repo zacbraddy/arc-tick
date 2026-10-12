@@ -3,30 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u2",
-      "question": "Plot each point against its own as-at-draw range, or a single current band?",
-      "approach": "Check how ranges vary in data/biomarkers; record the choice in NOTES.md",
-      "from": "biomarker-history"
-    },
-    {
-      "id": "u4",
-      "question": "How do we handle a single draw, gaps, missing or one-sided ranges, and a member with no results?",
-      "approach": "Survey data/biomarkers for real cases",
-      "from": "biomarker-history"
-    },
-    {
-      "id": "u3",
-      "question": "Which layout and interaction: inline sparkline that expands, a modal, or a detail view?",
-      "approach": "Pick the cheapest accessible option; reuse the Chart.js pattern from perf.js",
-      "from": "biomarker-history"
-    },
-    {
-      "id": "u1",
-      "question": "What's the thinnest end-to-end slice that meets every Task 1 requirement in ~20 min?",
-      "approach": "Cut layout/interaction to the minimum that's still inspectable and not a table",
-      "from": "biomarker-history"
-    },
-    {
       "id": "u5",
       "question": "Will Task 2 wearable persistence write into results:{id}? If so, history reads pay for wearable docs",
       "approach": "Decide in Task 2 shaping; prefer a separate partition",
@@ -64,6 +40,29 @@
       "source": "origins/biomarker-history/shaping-content/history-api-shape.md",
       "answers": "Extend GET /api/home or add a per-biomarker history endpoint, within the 35 ms p95 budget (incl. after wearable import)?",
       "from": "biomarker-history"
+    },
+    {
+      "id": "k6",
+      "fact": "Ranges drift across draws for 6/30 biomarkers; plot each point against its own as-at-draw bands (stepped), tooltip shows that draw's optimal range",
+      "source": "data-survey.md",
+      "answers": "Plot each point against its own as-at-draw range, or a single current band?"
+    },
+    {
+      "id": "k7",
+      "fact": "Seed data is clean (>=2 points each, no nulls/one-sided ranges) but common real-world edge cases are guarded cheaply: unknown id 404, empty 200, single point, gaps, same-date draws, missing bands, unit changes, outliers, member scoping",
+      "source": "data-survey.md"
+    },
+    {
+      "id": "k8",
+      "fact": "Inline expand under each marker card via an aria-expanded toggle (perf.js pattern); lazy fetch; Chart.js line on a linear time axis with a stepped-band plugin",
+      "source": "plan.md",
+      "answers": "Which layout and interaction: inline sparkline that expands, a modal, or a detail view?"
+    },
+    {
+      "id": "k9",
+      "fact": "Slices: 1) API endpoint + pytest; 2) inline chart with tooltips + empty state; 3) NOTES.md; extras after",
+      "source": "plan.md",
+      "answers": "What's the thinnest end-to-end slice that meets every Task 1 requirement in ~20 min?"
     }
   ],
   "decisions": [
@@ -72,6 +71,21 @@
       "decision": "Per-biomarker history endpoint (GET /api/biomarkers/{id}/history), /api/home unchanged — inlining history goes over the home budget at ~35+ draws; the endpoint pattern carries over to Task 2",
       "evidence": "origins/biomarker-history/shaping-content/history-api-shape.md",
       "from": "biomarker-history"
+    },
+    {
+      "id": "d2",
+      "decision": "Chart plots each point against its as-at-draw ranges as stepped bands, not the catalogue's current ranges",
+      "evidence": "data-survey.md"
+    },
+    {
+      "id": "d3",
+      "decision": "Guard common edge cases with one cheap check each, tested and listed in NOTES.md; no attempt at an infallible system",
+      "evidence": "data-survey.md"
+    },
+    {
+      "id": "d4",
+      "decision": "Inline expandable chart under each marker card, not a modal or detail route",
+      "evidence": "plan.md"
     }
   ],
   "lineage": [
@@ -98,6 +112,22 @@
     {
       "date": "2026-10-12",
       "event": "merged biomarker-history from shaping into origins/"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "decided: Chart plots each point against its as-at-draw ranges as stepped bands, not the catalogue's current ranges"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "decided: Edge cases handled minimally: empty history returns 200 with no points, unknown biomarker 404, missing band skipped; no extra code for cases absent from data"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "decided: Guard common edge cases with one cheap check each, tested and listed in NOTES.md; no attempt at an infallible system"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "decided: Inline expandable chart under each marker card, not a modal or detail route"
     }
   ],
   "type": "technical"

@@ -10,6 +10,8 @@ Delivers Task 1: members open a chart of any biomarker's history from the home s
 ## What's here
 - API shape (d1): [history-api-shape](origins/biomarker-history/shaping-content/history-api-shape.md)
 - Bench spike: [history-endpoint-bench](origins/biomarker-history/spikes/history-endpoint-bench/README.md)
+- Data survey (u2, u4: ranges and edge cases): [data-survey](data-survey.md)
+- Plan (scope, slices, tests, risks): [plan](plan.md)
 
 ## Related
 - [Task 1 brief](/TASK_1.md)
