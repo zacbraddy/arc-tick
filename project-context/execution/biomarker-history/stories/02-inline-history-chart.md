@@ -2,7 +2,7 @@
 title: Inline history chart
 shortDescription: History toggle on each marker card expands into a Chart.js line with inspectable tooltips and an empty state
 tags: [biomarkers, codebase]
-status: ready
+status: done
 owner: both
 dependsOn: [01]
 ---
@@ -79,29 +79,43 @@ In the browser, clicking History on any card shows that biomarker's history as a
   - The screen-reader list and the home bench check (story 05).
   - Server changes and a JS test harness.
 - **Fetch failure (d6):** show the `api()` error inline and retry on the next open, using the dashboard's existing plain-message style.
+- **Deviation (small):** options live in `historyChartOptions(points)` and messages in `historyMessage`, not inline in `loadHistory`. That's the same seam for story 03, just easier to read. A "Loading…" message shows while the fetch is in flight, and the line colour is `#2f6f62` (`--optimal`), hard-coded as `perf.js` does.
+- **Deviation (Guide):** 6a–6c were skipped ✂ because no member in `dev.db` has a single-point, zero-point or unit-change marker. Those paths are covered by reading the code only.
+- **Deviation (scope):** `origins/.../history-endpoint-bench/spike_app.py` was reformatted and its lint fixed, because at `HEAD` it failed `ruff check` and pre-commit would have blocked the commit. Its behaviour is unchanged.
 
 ## Guide
 Walked with the agent during `/implement-story`, in the browser as user-1 against `dev.db`. Tick each box as it passes. If one fails, leave it unticked and fix the problem before moving on.
 
-- [ ] 1. Run the dev server and sign in as user-1. Every card still shows its latest value, unit and status, plus a History button.
-- [ ] 2. Open DevTools → Network and click History on **Vitamin D**. 3 points appear, oldest on the left, spaced by date. The gaps where draws lack vitamin D are visibly wider.
-- [ ] 3. Hover each point. The tooltip shows the date, value, unit and status label.
-- [ ] 4. Close and reopen History. No second `/history` request appears.
-- [ ] 5. Open History on two other cards. Each loads its own chart.
-- [ ] 6a. Single-point marker (named below by the agent, or skip ✂ if none): the point sits centred and the axis doesn't collapse.
-- [ ] 6b. Zero-point marker (named below by the agent, or skip ✂ if none): the panel shows "No history yet".
-- [ ] 6c. Unit-change marker (named below by the agent, or skip ✂ if none): each tooltip shows its own point's unit.
-- [ ] 7. Block `cdn.jsdelivr.net` in DevTools and reload. History shows "Chart unavailable", with no uncaught console errors.
-- [ ] 8. Go Network → Offline and open an unopened card's History, and an error message shows. Go back online, close and reopen it, and the chart loads.
-- [ ] 9. Keyboard: Tab to History and press Enter/Space. It toggles and `aria-expanded` flips.
+- [x] 1. Run the dev server and sign in as user-1. Every card still shows its latest value, unit and status, plus a History button.
+- [x] 2. Open DevTools → Network and click History on **Vitamin D**. 3 points appear, oldest on the left, spaced by date. The gaps where draws lack vitamin D are visibly wider.
+- [x] 3. Hover each point. The tooltip shows the date, value, unit and status label.
+- [x] 4. Close and reopen History. No second `/history` request appears.
+- [x] 5. Open History on two other cards. Each loads its own chart.
+- [-] 6a. Single-point marker (named below by the agent, or skip ✂ if none): the point sits centred and the axis doesn't collapse.
+- [-] 6b. Zero-point marker (named below by the agent, or skip ✂ if none): the panel shows "No history yet".
+- [-] 6c. Unit-change marker (named below by the agent, or skip ✂ if none): each tooltip shows its own point's unit.
+- [x] 7. Block `cdn.jsdelivr.net` in DevTools and reload. History shows "Chart unavailable", with no uncaught console errors.
+- [x] 8. Go Network → Offline and open an unopened card's History, and an error message shows. Go back online, close and reopen it, and the chart loads.
+- [x] 9. Keyboard: Tab to History and press Enter/Space. It toggles and `aria-expanded` flips.
 
-Test markers (filled in by the agent before the walkthrough): single-point: _tbd_ · zero-point: _tbd_ · unit-change: _tbd_
+Test markers (filled in by the agent before the walkthrough): single-point: none · zero-point: none · unit-change: none (no member in `dev.db` has any of these; cards come from `/api/home`, so a zero-point card can't exist)
 
 ## Agent prepares
 - Before the walkthrough, query `dev.db` for user-1's markers with 1 point, 0 points, and a unit change between draws. Write their names into the "Test markers" line above, or write "none" so that step gets ✂.
 
 ## Record afterwards
 - The ticked Guide boxes and the Test markers line are the record. Add a one-line deviation under `## Implementation notes` only if a step needed a change. No accounts or credentials are involved.
+
+## Review
+`scripts/test` is green (57 passed, 1 xfailed) and `scripts/lint` is clean. Guide steps 1–5 and 7–9 are ticked, and 6a–6c are ✂ with a recorded reason. The code matches C4 `4-code.md#client` and every AC holds on reading. There's no must-fix.
+
+**Should-fix**
+- ✅ fixed (deviation note added). The staged diff also touches `origins/.../history-endpoint-bench/spike_app.py`, which breaks the Done-when rule of "only `app.js` and `styles.css`". The edit was forced: at `HEAD` that file fails `ruff check`, so pre-commit would have blocked the commit. It still edits frozen origins evidence and isn't recorded. Either add it as a deviation note or exclude `project-context/` from ruff/ty so spikes stop gating commits.
+
+**Nit**
+- ✅ fixed. `app/static/app.js:155`: the `Chart` check runs after the fetch, so a blocked CDN still costs a request. Check before calling `api()`.
+- ✅ fixed. `app/static/app.js:123`: `responsive: true` is the Chart.js default and can go.
+- ✅ fixed (a repeated label is blanked). `app/static/app.js:113`: linear ticks fall on round ms values, so two draws close together can produce repeated date labels.
 
 ## Related
 - [Epic hub](../README.md)

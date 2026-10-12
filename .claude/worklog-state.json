@@ -10,7 +10,9 @@
     "c1e7e6e7-0ffe-4cda-8edf-8419a33f2c89": 7,
     "c370db42-4027-4bb2-b117-892b82c9b9a0": 8,
     "b4caa92c-540a-4bf5-bdf8-a7d6fa98942f": 9,
-    "46832ad8-3a19-4e63-bc4a-a7b3346ef6bc": 10
+    "46832ad8-3a19-4e63-bc4a-a7b3346ef6bc": 10,
+    "7fb0f30b-f090-415f-83ab-132a5a3c12df": 11,
+    "0ac45ffe-2e04-4d8f-8107-5c448cc46583": 12
   },
   "rows": [
     {
@@ -67,6 +69,16 @@
       "start": 1791817680000,
       "finish": 1791818040000,
       "description": "Wrote story 02 (inline history chart): ACs, test plan, impl notes, manual guide; set ready"
+    },
+    {
+      "start": 1791818220000,
+      "finish": 1791818760000,
+      "description": "Story 02 implemented: inline History chart (toggle, lazy fetch, Chart.js line, empty/error/CDN states); manual Guide passed, edge cases skipped (no data)"
+    },
+    {
+      "start": 1791818880000,
+      "finish": 1791819000000,
+      "description": "Reviewed story 02 (inline history chart): no must-fix; added a deviation note for the lint-forced spike edit; marked done"
     }
   ]
 }

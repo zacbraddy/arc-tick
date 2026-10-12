@@ -212,6 +212,30 @@ button.quiet:hover { color: var(--ink); }
   color: var(--muted);
 }
 
+/* ---- history ---- */
+
+.history-toggle {
+  margin-top: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border-color: var(--rule);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.history-toggle:hover,
+.history-toggle[aria-expanded="true"] { color: var(--ink); }
+
+.history-panel { margin-top: 0.75rem; }
+
+.history-chart { position: relative; height: 200px; }
+
+.history-message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
 @media (max-width: 32rem) {
   .bar { flex-direction: column; padding-top: 2rem; }
   .marker-head { flex-wrap: wrap; }
