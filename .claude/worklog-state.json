@@ -9,7 +9,8 @@
     "2f6628f2-0ec6-4fc0-83b2-0646b5cf9d31": 6,
     "c1e7e6e7-0ffe-4cda-8edf-8419a33f2c89": 7,
     "c370db42-4027-4bb2-b117-892b82c9b9a0": 8,
-    "b4caa92c-540a-4bf5-bdf8-a7d6fa98942f": 9
+    "b4caa92c-540a-4bf5-bdf8-a7d6fa98942f": 9,
+    "46832ad8-3a19-4e63-bc4a-a7b3346ef6bc": 10
   },
   "rows": [
     {
@@ -61,6 +62,11 @@
       "start": 1791817440000,
       "finish": 1791817500000,
       "description": "Reviewed story 01 (history endpoint): clean apart from one test nit, fixed it and marked the story done"
+    },
+    {
+      "start": 1791817680000,
+      "finish": 1791818040000,
+      "description": "Wrote story 02 (inline history chart): ACs, test plan, impl notes, manual guide; set ready"
     }
   ]
 }

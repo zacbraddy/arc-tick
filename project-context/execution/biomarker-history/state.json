@@ -91,6 +91,11 @@
       "id": "d5",
       "decision": "Flat route module (app/routes/history.py) with a pure history_points function; no domain/service layer — one filter over one partition doesn't pay for an extra layer in this epic",
       "evidence": "c4/4-code.md"
+    },
+    {
+      "id": "d6",
+      "decision": "A failed history fetch (network, 401, 404) shows the api() error message inline in the panel, and the next open retries",
+      "evidence": "stories/02-inline-history-chart.md"
     }
   ],
   "lineage": [
@@ -141,6 +146,10 @@
     {
       "date": "2026-10-12",
       "event": "moved planning → execution"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "decided: A failed history fetch (network, 401, 404) shows the api() error message inline in the panel, and the next open retries"
     }
   ],
   "type": "technical"

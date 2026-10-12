@@ -18,3 +18,4 @@ Times are captured automatically from the system clock: start times round up to 
 | 8 | 2026-10-12 | 15:48 | 15:49 | 1 | 30 | write-story 01: wrote done-when, ACs, test plan and impl notes for history endpoint; set ready |
 | 9 | 2026-10-12 | 16:00 | 16:01 | 1 | 31 | Implemented story 01: GET /api/biomarkers/{id}/history built TDD, 11 new tests green |
 | 10 | 2026-10-12 | 16:04 | 16:05 | 1 | 32 | Reviewed story 01 (history endpoint): clean apart from one test nit, fixed it and marked the story done |
+| 11 | 2026-10-12 | 16:08 | 16:14 | 6 | 38 | Wrote story 02 (inline history chart): ACs, test plan, impl notes, manual guide; set ready |
