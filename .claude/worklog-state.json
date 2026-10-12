@@ -6,7 +6,8 @@
     "9cc1b0b0-beca-400b-90e7-c791fe208956": 3,
     "8d92d7c3-a79e-4f80-b666-cf53d8e218a6": 4,
     "35b942a3-6a83-445f-abdb-401644591d02": 5,
-    "2f6628f2-0ec6-4fc0-83b2-0646b5cf9d31": 6
+    "2f6628f2-0ec6-4fc0-83b2-0646b5cf9d31": 6,
+    "c1e7e6e7-0ffe-4cda-8edf-8419a33f2c89": 7
   },
   "rows": [
     {
@@ -43,6 +44,11 @@
       "start": 1791816000000,
       "finish": 1791816120000,
       "description": "break-down-epic: biomarker-history sliced into 5 draft stories on epic/biomarker-history"
+    },
+    {
+      "start": 1791816480000,
+      "finish": 1791816540000,
+      "description": "write-story 01: wrote done-when, ACs, test plan and impl notes for history endpoint; set ready"
     }
   ]
 }
