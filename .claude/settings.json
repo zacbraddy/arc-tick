@@ -1,0 +1,47 @@
+{
+  "outputStyle": "Partner In Crime",
+  "permissions": {
+    "allow": [
+      "Bash(node .claude/scripts/ctx.mjs:*)",
+      "Bash(jq:*)",
+      "Bash(node .claude/scripts/worklog.mjs:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/ctx.mjs\" index --quiet"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/ctx.mjs\" index --quiet"
+          },
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/worklog.mjs\" stop"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/worklog.mjs\" start"
+          }
+        ]
+      }
+    ]
+  }
+}
