@@ -16,7 +16,9 @@
     "007cc3f5-ce10-4c17-ab7b-ff082f5cf8f5": 13,
     "c882e40c-6558-41d4-b47b-ecad629d1df4": 14,
     "784c1a65-ebc2-48bb-9086-cfb17579a68e": 15,
-    "ae78e92f-276f-4d49-9d50-bf55e6d1ec6c": 16
+    "ae78e92f-276f-4d49-9d50-bf55e6d1ec6c": 16,
+    "2a4d6481-3cf0-49da-87ef-8b8151a09200": 17,
+    "c841f571-d68e-4c30-a325-7ef88aac9706": 18
   },
   "rows": [
     {
@@ -103,6 +105,16 @@
       "start": 1791820560000,
       "finish": 1791820920000,
       "description": "Wrote story 04 (home re-bench + NOTES.md); skipped rest of story 05, flagged for retro"
+    },
+    {
+      "start": 1791821040000,
+      "finish": 1791821700000,
+      "description": "Story 04: re-benched /api/home (all members p95 ≤3.4 ms) and wrote NOTES.md"
+    },
+    {
+      "start": 1791822540000,
+      "finish": 1791822660000,
+      "description": "Reviewed story 04 (NOTES.md), fixed AI-usage typos and archive tense, marked done"
     }
   ]
 }

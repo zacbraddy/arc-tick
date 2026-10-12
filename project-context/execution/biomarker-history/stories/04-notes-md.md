@@ -2,7 +2,7 @@
 title: NOTES.md
 shortDescription: Re-bench /api/home against the 35 ms budget, then write the submission's NOTES.md (assumptions, storage, left out, AI usage)
 tags: [biomarkers, constraints, performance]
-status: ready
+status: done
 owner: agent
 dependsOn: [01, 02]
 ---
@@ -67,7 +67,22 @@ A fresh bench shows `/api/home` p95 within 35 ms for every seed member after the
   - The hour is up. The home re-bench moved here because it proves the task still meets k4. The rest of 05 was a "cherry on top" (it said "only if the time-box allows").
   - Dropping polish to land working core slices is the intended call under a tight deadline.
   - **At retro**: move story 05's content back into the workflow as an idea or shaping item (whichever fits `/retro`'s conventions), so a future dev-workflow run can pick it up. Don't just close it with the epic.
+- **As run:** a `scripts/dev` server was already up on :8000 (Zac's, `--reload`, so it was on current code). The bench ran against it and left it running instead of starting and stopping a new one.
+- **Added to Left out / next:** a "read cost at scale" bullet (index by biomarker past a few hundred draws). This follows from the plan's read-cost risk.
 - **Out of scope**: Task 2 content beyond the "not started" note and the u5 plan.
+
+## Review
+Done-when and ACs met. Every code reference was checked against `app/routes/history.py`, `app/static/app.js`, `app/models.py` and `tests/test_history.py`. The d1 numbers match the spike, all 9 data-survey edge cases appear with correct guards, and a spot re-bench (tom.okafor, serial) reproduced ~3 ms. Tests: 57 passed, 1 xfailed. No secrets; the seed emails are `example.com`.
+
+**Must-fix**
+- `NOTES.md:68`: typos in reader-facing prose: "vibe-bro my away" → "my way"; "a written trail I which I then was in change of reviewing" → "a written trail, which I was in charge of reviewing".
+
+**Should-fix**
+- `NOTES.md:45`: "Comfortably under budget all round" overstates the concurrent column (p95 27.7–31.8 ms against 35). k4 is about serial p95, so scope the claim to serial and say concurrent p95 includes queueing.
+- `NOTES.md:5`: the past tense ("archived out of the repo") and the `git log --grep` pointer only hold once `/retro` commits `retro: archive biomarker-history (…)`. That matches the retro skill's message, so it's fine as long as retro runs before submission.
+
+**Nit**
+- `NOTES.md:3`: the intro paragraph runs long. The accessibility apology could be one sentence, since Left out / next already covers it.
 
 ## Links
 - [Plan](../plan.md)
