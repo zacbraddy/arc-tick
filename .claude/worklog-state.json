@@ -1,12 +1,18 @@
 {
   "sessions": {
-    "d35e97a1-abc5-499a-b585-4cce109e5738": 0
+    "d35e97a1-abc5-499a-b585-4cce109e5738": 0,
+    "5ac4f361-c278-4332-875b-018ef77a92d9": 1
   },
   "rows": [
     {
       "start": 1791808800000,
       "finish": 1791809340000,
       "description": "bootstrap-repo: wrote project-context README, seeded 10k (constraints, C4, structure, ADR 0001-0002), pruned .gitkeeps"
+    },
+    {
+      "start": 1791812280000,
+      "finish": 1791812520000,
+      "description": "ideate: fast-tracked TASK_1 to shaping/biomarker-history with 5 unknowns + 4 knowns, deleted raw"
     }
   ]
 }

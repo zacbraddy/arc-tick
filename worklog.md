@@ -9,3 +9,4 @@ Times are captured automatically from the system clock: start times round up to 
 | # | Date | Start | Finish | Duration (min) | Total elapsed (min) | What we did |
 |---|------|-------|--------|----------------|---------------------|-------------|
 | 1 | 2026-10-12 | 13:40 | 13:49 | 9 | 9 | bootstrap-repo: wrote project-context README, seeded 10k (constraints, C4, structure, ADR 0001-0002), pruned .gitkeeps |
+| 2 | 2026-10-12 | 14:38 | 14:42 | 4 | 13 | ideate: fast-tracked TASK_1 to shaping/biomarker-history with 5 unknowns + 4 knowns, deleted raw |

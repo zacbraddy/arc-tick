@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "title": "Biomarker history",
+    "path": "project-context/shaping/biomarker-history/README.md",
+    "shortDescription": "Task 1. Chart each biomarker's history against its reference ranges, reachable from the home screen",
+    "tags": [
+      "biomarkers",
+      "constraints",
+      "performance"
+    ]
+  }
+]

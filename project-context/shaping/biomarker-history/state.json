@@ -1,0 +1,65 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u1",
+      "question": "What's the thinnest end-to-end slice that meets every Task 1 requirement in ~20 min?",
+      "approach": "Cut layout/interaction to the minimum that's still inspectable and not a table"
+    },
+    {
+      "id": "u2",
+      "question": "Extend GET /api/home or add a per-biomarker history endpoint, within the 35 ms p95 budget (incl. after wearable import)?",
+      "approach": "Run scripts/bench.py against both options"
+    },
+    {
+      "id": "u3",
+      "question": "Plot each point against its own as-at-draw range, or a single current band?",
+      "approach": "Check how ranges vary in data/biomarkers; record the choice in NOTES.md"
+    },
+    {
+      "id": "u4",
+      "question": "Which layout and interaction: inline sparkline that expands, a modal, or a detail view?",
+      "approach": "Pick the cheapest accessible option; reuse the Chart.js pattern from perf.js"
+    },
+    {
+      "id": "u5",
+      "question": "How do we handle a single draw, gaps, missing or one-sided ranges, and a member with no results?",
+      "approach": "Survey data/biomarkers for real cases"
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Must keep each biomarker's latest value and unit visible, show its history in date order with values the member can inspect, show reference ranges, use the signed-in member's results, and not rely on a table alone",
+      "source": "/TASK_1.md"
+    },
+    {
+      "id": "k2",
+      "fact": "Tests for the history behaviour and a short note of assumptions (NOTES.md) are required. No new ingest code",
+      "source": "/TASK_1.md"
+    },
+    {
+      "id": "k3",
+      "fact": "Each result keeps its as-at-draw ranges and status, and biomarkers can be missing from some draws",
+      "source": "/project-context/10k/technical/adrs/0002-draw-results-keep-as-at-draw-ranges.md"
+    },
+    {
+      "id": "k4",
+      "fact": "Store API frozen, /api/home <=35 ms p95, app/auth.py unchanged, ~20 min budget for Task 1",
+      "source": "/project-context/10k/business-constraints.md"
+    }
+  ],
+  "decisions": [],
+  "lineage": [
+    {
+      "date": "2026-10-12",
+      "event": "created in shaping"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "from raw: TASK_1.md (fast-tracked to shaping)"
+    }
+  ],
+  "type": "technical"
+}
