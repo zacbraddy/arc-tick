@@ -2,7 +2,7 @@
 title: History endpoint
 shortDescription: GET /api/biomarkers/{id}/history returns the signed-in member's points for one biomarker, oldest first, with as-at-draw ranges
 tags: [biomarkers, codebase]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -56,7 +56,15 @@ Adds the per-biomarker history endpoint (d1), built test-first. `/api/home`, the
 - **`app/main.py`:** `include_router(history.router)`.
 - **Edge cases (d3):** a draw with an identical `tested_at` merges at the store (ADR-0002), so only same-day draws at different times can occur, and ISO string order handles them. Each guard gets one test and is listed in NOTES.md (story 04).
 - **Status:** copied straight from the stored result. Don't call `band_for` (ADR-0002).
+- **Deviation (Done when):** user-1 has 5 draws but vitamin_d is in only 3 of them (2025-03-18 and 2026-03-04 lack it), so the curl check returns 3 points, not 5. The optimal band drifts from 50–80 to 60–90 at the 2026-09-01 draw. That's the expected missing-from-draw behaviour, and the story's "5 points" was a misreading of the survey.
 - **Out of scope:** `/api/home`, ingest, the store API, `auth.py`, unit conversion, the frontend, and u5 (wearable docs in `results:{id}` are a Task 2 performance concern, not behaviour).
+
+## Review
+`scripts/test`: 57 passed, 1 xfailed. Every acceptance criterion has a test. Implementation matches C4 4-code and the plan. `home.py`, `auth.py` and `store.py` are untouched. A TestClient run against `dev.db` as user-1 returned 3 vitamin_d points oldest first, and optimal moved from 50–80 to 60–90 at 2026-09-01, which matches the Deviation note.
+
+- **must-fix:** none.
+- **should-fix:** none.
+- **nit (fixed):** `tests/test_history.py:150-172`: the integration happy path re-asserts drifted ranges and status. The unit test at `tests/test_history.py:75` already covers that. Order, shape and `meta.count` would be enough here.
 
 ## Related
 - [Epic hub](../README.md)

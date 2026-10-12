@@ -7,7 +7,9 @@
     "8d92d7c3-a79e-4f80-b666-cf53d8e218a6": 4,
     "35b942a3-6a83-445f-abdb-401644591d02": 5,
     "2f6628f2-0ec6-4fc0-83b2-0646b5cf9d31": 6,
-    "c1e7e6e7-0ffe-4cda-8edf-8419a33f2c89": 7
+    "c1e7e6e7-0ffe-4cda-8edf-8419a33f2c89": 7,
+    "c370db42-4027-4bb2-b117-892b82c9b9a0": 8,
+    "b4caa92c-540a-4bf5-bdf8-a7d6fa98942f": 9
   },
   "rows": [
     {
@@ -49,6 +51,16 @@
       "start": 1791816480000,
       "finish": 1791816540000,
       "description": "write-story 01: wrote done-when, ACs, test plan and impl notes for history endpoint; set ready"
+    },
+    {
+      "start": 1791817200000,
+      "finish": 1791817260000,
+      "description": "Implemented story 01: GET /api/biomarkers/{id}/history built TDD, 11 new tests green"
+    },
+    {
+      "start": 1791817440000,
+      "finish": 1791817500000,
+      "description": "Reviewed story 01 (history endpoint): clean apart from one test nit, fixed it and marked the story done"
     }
   ]
 }
