@@ -68,6 +68,11 @@ function renderMarker(result) {
       <div class="tick" style="left:${offset}%"></div>
     </div>
     <div class="scale-labels"><span class="low"></span><span class="high"></span></div>
+    <div class="history">
+      <button type="button" class="history-toggle" aria-expanded="false"
+        aria-controls="history-${result.biomarker_id}">History</button>
+      <div class="history-panel" id="history-${result.biomarker_id}" hidden></div>
+    </div>
   `;
 
   node.querySelector(".marker-name").textContent = result.name;
@@ -77,7 +82,174 @@ function renderMarker(result) {
     BAND_LABEL[result.status] ?? result.status;
   node.querySelector(".low").textContent = low;
   node.querySelector(".high").textContent = high;
+
+  const toggle = node.querySelector(".history-toggle");
+  const panel = node.querySelector(".history-panel");
+  toggle.addEventListener("click", () =>
+    toggleHistory(toggle, panel, result.biomarker_id)
+  );
   return node;
+}
+
+function toggleHistory(button, panel, biomarkerId) {
+  const open = panel.hidden;
+  panel.hidden = !open;
+  button.setAttribute("aria-expanded", String(open));
+  if (open && !panel.dataset.loaded) loadHistory(panel, biomarkerId);
+}
+
+function historyMessage(panel, text) {
+  const message = document.createElement("p");
+  message.className = "history-message";
+  message.textContent = text;
+  panel.replaceChildren(message);
+}
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+const tickDate = (ms) => formatDate(new Date(ms).toISOString());
+
+const validBand = (band) =>
+  Boolean(band) && Number.isFinite(band.min) && Number.isFinite(band.max) && band.max > band.min;
+
+// Optimal paints last so it wins wherever real data overlaps.
+const BAND_PAINT_ORDER = ["improve", "good", "optimal"];
+
+let cachedBandColours;
+function bandColours() {
+  if (!cachedBandColours) {
+    const css = getComputedStyle(document.documentElement);
+    cachedBandColours = Object.fromEntries(
+      BAND_PAINT_ORDER.map((band) => [band, css.getPropertyValue(`--${band}`).trim()])
+    );
+  }
+  return cachedBandColours;
+}
+
+/* Each draw's own ranges (ADR-0002) fill from its x to the next draw's x, so
+   bands step where the lab changed them. Left of the first draw stays empty. */
+const bandPlugin = {
+  id: "asAtDrawBands",
+  beforeDatasetsDraw(chart) {
+    const data = chart.data.datasets[0].data;
+    const { ctx, chartArea, scales: { x, y } } = chart;
+    const colour = bandColours();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(chartArea.left, chartArea.top, chartArea.width, chartArea.height);
+    ctx.clip();
+    ctx.globalAlpha = 0.15;
+    data.forEach(({ x: at, point }, i) => {
+      const x0 = x.getPixelForValue(at);
+      const x1 = i + 1 < data.length ? x.getPixelForValue(data[i + 1].x) : chartArea.right;
+      for (const name of BAND_PAINT_ORDER) {
+        const band = point.ranges?.[name];
+        if (!validBand(band)) continue;
+        const top = y.getPixelForValue(band.max);
+        ctx.fillStyle = colour[name];
+        ctx.fillRect(x0, top, x1 - x0, y.getPixelForValue(band.min) - top);
+      }
+    });
+    ctx.restore();
+  },
+};
+
+function valueExtent(points) {
+  const values = points.flatMap((p) => [
+    p.value,
+    ...BAND_ORDER.map((name) => p.ranges?.[name])
+      .filter(validBand)
+      .flatMap((band) => [band.min, band.max]),
+  ]);
+  return { suggestedMin: Math.min(...values), suggestedMax: Math.max(...values) };
+}
+
+function historyChartOptions(points) {
+  const x = {
+    type: "linear",
+    ticks: {
+      // Linear ticks fall on round ms values, so close draws can repeat a date.
+      callback: (ms, i, ticks) =>
+        i > 0 && tickDate(ticks[i - 1].value) === tickDate(ms) ? "" : tickDate(ms),
+    },
+  };
+  if (points.length === 1) {
+    const only = Date.parse(points[0].tested_at);
+    x.min = only - 30 * DAY_MS;
+    x.max = only + 30 * DAY_MS;
+  } else {
+    // Room right of the latest draw, or its as-at-draw bands are a sliver at the edge.
+    const first = Date.parse(points[0].tested_at);
+    const last = Date.parse(points[points.length - 1].tested_at);
+    x.suggestedMax = last + Math.max(30 * DAY_MS, (last - first) * 0.15);
+  }
+
+  return {
+    animation: false,
+    maintainAspectRatio: false,
+    scales: { x, y: valueExtent(points) },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: (items) => formatDate(items[0].raw.point.tested_at),
+          label: ({ raw: { point } }) =>
+            `${point.value} ${point.unit} · ${BAND_LABEL[point.status] ?? point.status}`,
+          afterLabel: ({ raw: { point } }) => {
+            const optimal = point.ranges?.optimal;
+            return validBand(optimal) ? `Optimal ${optimal.min}–${optimal.max} ${point.unit}` : "";
+          },
+        },
+      },
+    },
+  };
+}
+
+async function loadHistory(panel, biomarkerId) {
+  if (typeof Chart === "undefined") {
+    panel.dataset.loaded = "true";
+    return historyMessage(panel, "Chart unavailable");
+  }
+
+  panel.dataset.loaded = "loading";
+  historyMessage(panel, "Loading…");
+
+  let data;
+  try {
+    ({ data } = await api(`/api/biomarkers/${encodeURIComponent(biomarkerId)}/history`));
+  } catch (err) {
+    delete panel.dataset.loaded;
+    historyMessage(panel, err.message);
+    return;
+  }
+
+  panel.dataset.loaded = "true";
+  const { biomarker, points } = data;
+  if (points.length === 0) return historyMessage(panel, "No history yet");
+
+  const wrap = document.createElement("div");
+  wrap.className = "history-chart";
+  const canvas = document.createElement("canvas");
+  canvas.setAttribute("role", "img");
+  canvas.setAttribute("aria-label", `${biomarker.name} history, ${biomarker.unit}`);
+  wrap.append(canvas);
+  panel.replaceChildren(wrap);
+
+  new Chart(canvas, {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          data: points.map((p) => ({ x: Date.parse(p.tested_at), y: p.value, point: p })),
+          borderColor: "#2f6f62",
+          pointRadius: 3,
+        },
+      ],
+    },
+    options: historyChartOptions(points),
+    plugins: [bandPlugin],
+  });
 }
 
 function renderResults(results) {

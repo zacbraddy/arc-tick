@@ -5,7 +5,21 @@
     "e6e2ef57-5cdd-4731-8112-d5d273bc6b62": 2,
     "9cc1b0b0-beca-400b-90e7-c791fe208956": 3,
     "8d92d7c3-a79e-4f80-b666-cf53d8e218a6": 4,
-    "35b942a3-6a83-445f-abdb-401644591d02": 5
+    "35b942a3-6a83-445f-abdb-401644591d02": 5,
+    "2f6628f2-0ec6-4fc0-83b2-0646b5cf9d31": 6,
+    "c1e7e6e7-0ffe-4cda-8edf-8419a33f2c89": 7,
+    "c370db42-4027-4bb2-b117-892b82c9b9a0": 8,
+    "b4caa92c-540a-4bf5-bdf8-a7d6fa98942f": 9,
+    "46832ad8-3a19-4e63-bc4a-a7b3346ef6bc": 10,
+    "7fb0f30b-f090-415f-83ab-132a5a3c12df": 11,
+    "0ac45ffe-2e04-4d8f-8107-5c448cc46583": 12,
+    "007cc3f5-ce10-4c17-ab7b-ff082f5cf8f5": 13,
+    "c882e40c-6558-41d4-b47b-ecad629d1df4": 14,
+    "784c1a65-ebc2-48bb-9086-cfb17579a68e": 15,
+    "ae78e92f-276f-4d49-9d50-bf55e6d1ec6c": 16,
+    "2a4d6481-3cf0-49da-87ef-8b8151a09200": 17,
+    "c841f571-d68e-4c30-a325-7ef88aac9706": 18,
+    "591a6068-f830-493d-a0c7-fd7ce51517b3": 19
   },
   "rows": [
     {
@@ -37,6 +51,76 @@
       "start": 1791815640000,
       "finish": 1791815700000,
       "description": "plan-epic: Drew C4 levels 1-4 for biomarker-history, recorded d5 (no domain layer), sent to stage-gate for execution"
+    },
+    {
+      "start": 1791816000000,
+      "finish": 1791816120000,
+      "description": "break-down-epic: biomarker-history sliced into 5 draft stories on epic/biomarker-history"
+    },
+    {
+      "start": 1791816480000,
+      "finish": 1791816540000,
+      "description": "write-story 01: wrote done-when, ACs, test plan and impl notes for history endpoint; set ready"
+    },
+    {
+      "start": 1791817200000,
+      "finish": 1791817260000,
+      "description": "Implemented story 01: GET /api/biomarkers/{id}/history built TDD, 11 new tests green"
+    },
+    {
+      "start": 1791817440000,
+      "finish": 1791817500000,
+      "description": "Reviewed story 01 (history endpoint): clean apart from one test nit, fixed it and marked the story done"
+    },
+    {
+      "start": 1791817680000,
+      "finish": 1791818040000,
+      "description": "Wrote story 02 (inline history chart): ACs, test plan, impl notes, manual guide; set ready"
+    },
+    {
+      "start": 1791818220000,
+      "finish": 1791818760000,
+      "description": "Story 02 implemented: inline History chart (toggle, lazy fetch, Chart.js line, empty/error/CDN states); manual Guide passed, edge cases skipped (no data)"
+    },
+    {
+      "start": 1791818880000,
+      "finish": 1791819000000,
+      "description": "Reviewed story 02 (inline history chart): no must-fix; added a deviation note for the lint-forced spike edit; marked done"
+    },
+    {
+      "start": 1791819180000,
+      "finish": 1791819240000,
+      "description": "Wrote story 03 (as-at-draw range bands) and set it ready"
+    },
+    {
+      "start": 1791819480000,
+      "finish": 1791820200000,
+      "description": "Story 03 implemented: as-at-draw stepped range bands, y-extent, optimal tooltip, x-axis right padding; all 8 Guide steps passed"
+    },
+    {
+      "start": 1791820380000,
+      "finish": 1791820440000,
+      "description": "Reviewed story 03 (as-at-draw range bands): clean, fixed 2 nits, marked done"
+    },
+    {
+      "start": 1791820560000,
+      "finish": 1791820920000,
+      "description": "Wrote story 04 (home re-bench + NOTES.md); skipped rest of story 05, flagged for retro"
+    },
+    {
+      "start": 1791821040000,
+      "finish": 1791821700000,
+      "description": "Story 04: re-benched /api/home (all members p95 ≤3.4 ms) and wrote NOTES.md"
+    },
+    {
+      "start": 1791822540000,
+      "finish": 1791822660000,
+      "description": "Reviewed story 04 (NOTES.md), fixed AI-usage typos and archive tense, marked done"
+    },
+    {
+      "start": 1791822780000,
+      "finish": 1791823560000,
+      "description": "Retro biomarker-history: ADR-0003/0004, 10k C4/structure/product updates, follow-ups to raw/"
     }
   ]
 }

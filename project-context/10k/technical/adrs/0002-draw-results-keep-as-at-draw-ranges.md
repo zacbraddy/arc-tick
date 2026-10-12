@@ -18,11 +18,12 @@ A `BiomarkerResult` stores its `status` and `ranges` as they were when the draw 
 - The definition supplies only name, category, description and direction. If a definition is missing, the result falls back to its ID, the category `other` and the direction `in_range`.
 
 ## Consequences
-- History charts must draw each point against *its own* ranges, or explicitly choose and document another policy (for example current ranges as the band, with per-point status). That choice goes in `NOTES.md`.
+- History charts draw each point against *its own* ranges ([ADR-0004](/project-context/10k/technical/adrs/0004-charts-use-as-at-draw-ranges.md)).
 - A biomarker may be absent from any draw, so histories have gaps and must be built per biomarker across all of a member's draws.
 - Imported draws can't restore historical classifications.
 
 ## Related
 - [ADR-0001: Partitioned document store](/project-context/10k/technical/adrs/0001-partitioned-document-store.md)
 - [Business constraints](/project-context/10k/business-constraints.md)
+- [ADR-0004: Charts use as-at-draw ranges](/project-context/10k/technical/adrs/0004-charts-use-as-at-draw-ranges.md)
 - [C4 context and containers](/project-context/10k/technical/architecture/c4-context-containers.md)

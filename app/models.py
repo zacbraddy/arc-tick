@@ -116,6 +116,25 @@ class HomePayload(BaseModel):
     results: list[BiomarkerView]
 
 
+class HistoryBiomarker(BaseModel):
+    id: str
+    name: str
+    unit: str
+
+
+class HistoryPoint(BaseModel):
+    tested_at: str
+    value: float
+    unit: str
+    status: str
+    ranges: Ranges
+
+
+class HistoryPayload(BaseModel):
+    biomarker: HistoryBiomarker
+    points: list[HistoryPoint]
+
+
 class ReadingBody(BaseModel):
     biomarker_id: str
     value: float
