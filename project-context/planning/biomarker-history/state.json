@@ -1,0 +1,104 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u2",
+      "question": "Plot each point against its own as-at-draw range, or a single current band?",
+      "approach": "Check how ranges vary in data/biomarkers; record the choice in NOTES.md",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "u4",
+      "question": "How do we handle a single draw, gaps, missing or one-sided ranges, and a member with no results?",
+      "approach": "Survey data/biomarkers for real cases",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "u3",
+      "question": "Which layout and interaction: inline sparkline that expands, a modal, or a detail view?",
+      "approach": "Pick the cheapest accessible option; reuse the Chart.js pattern from perf.js",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "u1",
+      "question": "What's the thinnest end-to-end slice that meets every Task 1 requirement in ~20 min?",
+      "approach": "Cut layout/interaction to the minimum that's still inspectable and not a table",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "u5",
+      "question": "Will Task 2 wearable persistence write into results:{id}? If so, history reads pay for wearable docs",
+      "approach": "Decide in Task 2 shaping; prefer a separate partition",
+      "from": "biomarker-history"
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Must keep each biomarker's latest value and unit visible, show its history in date order with values the member can inspect, show reference ranges, use the signed-in member's results, and not rely on a table alone",
+      "source": "/TASK_1.md",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "k2",
+      "fact": "Tests for the history behaviour and a short note of assumptions (NOTES.md) are required. No new ingest code",
+      "source": "/TASK_1.md",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "k3",
+      "fact": "Each result keeps its as-at-draw ranges and status, and biomarkers can be missing from some draws",
+      "source": "/project-context/10k/technical/adrs/0002-draw-results-keep-as-at-draw-ranges.md",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "k4",
+      "fact": "Store API frozen, /api/home <=35 ms p95, app/auth.py unchanged, ~20 min budget for Task 1",
+      "source": "/project-context/10k/business-constraints.md",
+      "from": "biomarker-history"
+    },
+    {
+      "id": "k5",
+      "fact": "Add GET /api/biomarkers/{id}/history; leave /api/home alone. At 50 draws, inline history puts home p95 at 55 ms (over 35); the per-biomarker endpoint is 10.5 ms and home stays at 3.5 ms",
+      "source": "origins/biomarker-history/shaping-content/history-api-shape.md",
+      "answers": "Extend GET /api/home or add a per-biomarker history endpoint, within the 35 ms p95 budget (incl. after wearable import)?",
+      "from": "biomarker-history"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Per-biomarker history endpoint (GET /api/biomarkers/{id}/history), /api/home unchanged — inlining history goes over the home budget at ~35+ draws; the endpoint pattern carries over to Task 2",
+      "evidence": "origins/biomarker-history/shaping-content/history-api-shape.md",
+      "from": "biomarker-history"
+    }
+  ],
+  "lineage": [
+    {
+      "date": "2026-10-12",
+      "event": "created in planning"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "[biomarker-history] created in shaping"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "[biomarker-history] from raw: TASK_1.md (fast-tracked to shaping)"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "[biomarker-history] decided: Per-biomarker history endpoint (GET /api/biomarkers/{id}/history), /api/home unchanged — inlining history goes over the home budget at ~35+ draws; the endpoint pattern carries over to Task 2"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "[biomarker-history] status → ready-for-planning: API shape proven by bench spike (d1), budget agreed; remaining unknowns are cheap planning-level UI/edge-case picks or Task 2's"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "merged biomarker-history from shaping into origins/"
+    }
+  ],
+  "type": "technical"
+}

@@ -31,6 +31,6 @@ We tested inlining every biomarker's history in `GET /api/home` (Option A) again
 - Task 2's wearable persistence may write into `results:{id}` (`ReadingPayload.created_draw` hints at that) or into its own partition. If it shares the partition, every history read pays for wearable docs too. Logged as a new unknown.
 
 ## Related
-- [Hub](../README.md)
+- [Hub](../../../README.md)
 - [Business constraints](/project-context/10k/business-constraints.md)
 - [ADR-0001: Partitioned document store](/project-context/10k/technical/adrs/0001-partitioned-document-store.md)

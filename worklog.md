@@ -11,3 +11,4 @@ Times are captured automatically from the system clock: start times round up to 
 | 1 | 2026-10-12 | 13:40 | 13:49 | 9 | 9 | bootstrap-repo: wrote project-context README, seeded 10k (constraints, C4, structure, ADR 0001-0002), pruned .gitkeeps |
 | 2 | 2026-10-12 | 14:38 | 14:42 | 4 | 13 | ideate: fast-tracked TASK_1 to shaping/biomarker-history with 5 unknowns + 4 knowns, deleted raw |
 | 3 | 2026-10-12 | 15:03 | 15:07 | 4 | 17 | Shaped biomarker-history: benched API options, chose per-biomarker history endpoint, gated ready-for-planning |
+| 4 | 2026-10-12 | 15:14 | 15:17 | 3 | 20 | plan-epic: created technical epic biomarker-history, merged shaping item, reordered planning unknowns |
