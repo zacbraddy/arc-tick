@@ -13,7 +13,9 @@
     "46832ad8-3a19-4e63-bc4a-a7b3346ef6bc": 10,
     "7fb0f30b-f090-415f-83ab-132a5a3c12df": 11,
     "0ac45ffe-2e04-4d8f-8107-5c448cc46583": 12,
-    "007cc3f5-ce10-4c17-ab7b-ff082f5cf8f5": 13
+    "007cc3f5-ce10-4c17-ab7b-ff082f5cf8f5": 13,
+    "c882e40c-6558-41d4-b47b-ecad629d1df4": 14,
+    "784c1a65-ebc2-48bb-9086-cfb17579a68e": 15
   },
   "rows": [
     {
@@ -85,6 +87,16 @@
       "start": 1791819180000,
       "finish": 1791819240000,
       "description": "Wrote story 03 (as-at-draw range bands) and set it ready"
+    },
+    {
+      "start": 1791819480000,
+      "finish": 1791820200000,
+      "description": "Story 03 implemented: as-at-draw stepped range bands, y-extent, optimal tooltip, x-axis right padding; all 8 Guide steps passed"
+    },
+    {
+      "start": 1791820380000,
+      "finish": 1791820440000,
+      "description": "Reviewed story 03 (as-at-draw range bands): clean, fixed 2 nits, marked done"
     }
   ]
 }

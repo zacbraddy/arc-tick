@@ -2,7 +2,7 @@
 title: As-at-draw range bands
 shortDescription: Stepped improve/good/optimal bands behind the history line, each draw using its own as-at-draw ranges
 tags: [biomarkers, codebase]
-status: ready
+status: done
 owner: both
 dependsOn: [02]
 ---
@@ -66,21 +66,22 @@ In the browser, each history chart shows improve/good/optimal bands behind the p
   - Same-day draws: a zero/near-zero width segment is fine.
   - Unit change: bands use each point's own numbers with no conversion; NOTES.md flags it (already a known limitation).
   - Contiguous bands in the seed data don't overlap, so paint order doesn't matter. Paint improve → good → optimal anyway so optimal wins if real data overlaps.
+- **Deviation (Guide step 2):** the x-axis now pads past the latest draw (`suggestedMax` = last + max(30 days, 15% of span)). Without it, the latest draw sat on the right edge and its stepped segment was a sliver.
 - **Out of scope:** pinning one-sided bands to the axis edge (plan extras), a band legend, the screen-reader list (05), server changes, a JS harness.
 
 ## Guide
 Walk it with the agent during `/implement-story`, in the browser as user-1 against `dev.db`. Tick each box as it passes. If one fails, leave it unticked and fix it before moving on.
 
-- [ ] 1. Run the dev server, sign in as user-1 and open History on **Vitamin D**. Three coloured bands sit behind the line; the line and points draw on top.
-- [ ] 2. On Vitamin D, the bands step at the 2026-09-01 draw: optimal moves up (50–80 → 60–90) and good/improve shift with it. The last segment reaches the right edge.
-- [ ] 3. Hover each Vitamin D point. The tooltip adds that draw's optimal range (50–80 on the first two, 60–90 on the last).
-- [ ] 4. Open a non-drifting marker (agent names one below). Its bands are flat across the chart.
-- [ ] 5. Open another drifted marker (LDL or ApoB). The bands step where the agent says its ranges change.
-- [ ] 6. Out-of-band marker (agent names one below, or ✂ if none): the out-of-band point and the full bands are both visible, with nothing clipped.
-- [ ] 7. Missing-band guard: in DevTools, break one point's `ranges.good` (the agent gives a snippet that patches the response before the chart draws). That band is skipped for that segment, everything else draws, and there are no console errors.
-- [ ] 8. Earlier checks still hold: re-open/close makes no new request, keyboard toggle works, and the blocked CDN still shows "Chart unavailable".
+- [x] 1. Run the dev server, sign in as user-1 and open History on **Vitamin D**. Three coloured bands sit behind the line; the line and points draw on top.
+- [x] 2. On Vitamin D, the bands step at the 2026-09-01 draw: optimal moves up (50–80 → 60–90) and good/improve shift with it. The last segment reaches the right edge.
+- [x] 3. Hover each Vitamin D point. The tooltip adds that draw's optimal range (50–80 on the first two, 60–90 on the last).
+- [x] 4. Open a non-drifting marker (agent names one below). Its bands are flat across the chart.
+- [x] 5. Open another drifted marker (LDL or ApoB). The bands step where the agent says its ranges change.
+- [x] 6. Out-of-band marker (agent names one below, or ✂ if none): the out-of-band point and the full bands are both visible, with nothing clipped.
+- [x] 7. Missing-band guard: in DevTools, break one point's `ranges.good` (the agent gives a snippet that patches the response before the chart draws). That band is skipped for that segment, everything else draws, and there are no console errors.
+- [x] 8. Earlier checks still hold: re-open/close makes no new request, keyboard toggle works, and the blocked CDN still shows "Chart unavailable".
 
-Test markers (filled in by the agent before the walkthrough): flat: _ · second drifted: _ (changes at _) · out-of-band: _
+Test markers (filled in by the agent before the walkthrough): flat: Total cholesterol · second drifted: LDL cholesterol (changes at 2026-03-04: optimal 0–100 → 0–110) · out-of-band: Homocysteine (65.6 on 2024-10-01, above improve's 15–60)
 
 ## Agent prepares
 - Query `dev.db` for user-1: one non-drifting marker, the draw date where LDL/ApoB ranges change, and any point whose value sits outside all of its bands. Fill in the "Test markers" line, or write "none" so that step is ✂.
@@ -88,6 +89,14 @@ Test markers (filled in by the agent before the walkthrough): flat: _ · second 
 
 ## Record afterwards
 - The ticked Guide boxes and the Test markers line are the record. Add a deviation note under `## Implementation notes` if the fallback was taken or a step needed a change. No accounts or credentials are involved.
+
+## Review
+Done-when met: all 8 Guide boxes ticked, `scripts/test` green (57 passed, 1 xfailed), and the code diff touches only `app/static/app.js`. Every AC holds; the fallback wasn't needed. Matches C4 `bandPlugin` and the plan. No security or correctness red flags.
+
+- **must-fix:** none.
+- **should-fix:** none.
+- **nit:** `app/static/app.js:115`: "widest-first" is wrong. The bands sit side by side rather than nested, so improve isn't the widest. Just say optimal paints last so it wins on overlap. **Fixed:** the comment is reworded.
+- **nit:** `app/static/app.js:125`: `getComputedStyle` and the colour map run on every draw, including each hover redraw. The notes said to read them once. It's cheap, but hoisting it to a lazy module-level read matches the spec. **Fixed:** `bandColours()` now reads them once and caches the result.
 
 ## Related
 - [Epic hub](../README.md)
