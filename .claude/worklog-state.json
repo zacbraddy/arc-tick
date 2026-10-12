@@ -1,0 +1,12 @@
+{
+  "sessions": {
+    "d35e97a1-abc5-499a-b585-4cce109e5738": 0
+  },
+  "rows": [
+    {
+      "start": 1791808800000,
+      "finish": 1791809340000,
+      "description": "bootstrap-repo: wrote project-context README, seeded 10k (constraints, C4, structure, ADR 0001-0002), pruned .gitkeeps"
+    }
+  ]
+}

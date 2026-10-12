@@ -1,0 +1,54 @@
+[
+  {
+    "tag": "architecture",
+    "shortDescription": "System shape: actors, containers, how parts talk",
+    "department": [
+      "technical"
+    ]
+  },
+  {
+    "tag": "biomarkers",
+    "shortDescription": "Blood-draw results, definitions, ranges and their history",
+    "department": [
+      "technical",
+      "product"
+    ]
+  },
+  {
+    "tag": "codebase",
+    "shortDescription": "Where code lives and how to run, test and lint it",
+    "department": [
+      "technical"
+    ]
+  },
+  {
+    "tag": "constraints",
+    "shortDescription": "Hard limits we must work within: brief rules, budgets, things we may not change",
+    "department": [
+      "product",
+      "technical"
+    ]
+  },
+  {
+    "tag": "data-store",
+    "shortDescription": "The partitioned document store, its API and key layouts",
+    "department": [
+      "technical"
+    ]
+  },
+  {
+    "tag": "performance",
+    "shortDescription": "Latency budgets and how they're measured",
+    "department": [
+      "technical"
+    ]
+  },
+  {
+    "tag": "wearables",
+    "shortDescription": "Wearable provider deliveries and daily metrics",
+    "department": [
+      "technical",
+      "product"
+    ]
+  }
+]

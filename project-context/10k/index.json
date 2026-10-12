@@ -1,0 +1,48 @@
+[
+  {
+    "title": "Business constraints — Peak take-home",
+    "path": "project-context/10k/business-constraints.md",
+    "shortDescription": "The Peak assessment brief, its submission rules and evaluation criteria, and the hard technical rules Zac has adopted as binding.",
+    "tags": [
+      "constraints",
+      "performance"
+    ]
+  },
+  {
+    "title": "ADR-0001: Partitioned document store is the only persistence",
+    "path": "project-context/10k/technical/adrs/0001-partitioned-document-store.md",
+    "shortDescription": "All persistence goes through Store's frozen pk/sk API with no indexes; documents the current key layout and what it makes cheap or expensive.",
+    "tags": [
+      "data-store",
+      "architecture",
+      "constraints"
+    ]
+  },
+  {
+    "title": "ADR-0002: Draw results keep the ranges and status they had when drawn",
+    "path": "project-context/10k/technical/adrs/0002-draw-results-keep-as-at-draw-ranges.md",
+    "shortDescription": "Each stored biomarker result carries its own status and reference ranges as at the draw; ingest classifies against current definitions and merges by biomarker ID.",
+    "tags": [
+      "biomarkers",
+      "data-store"
+    ]
+  },
+  {
+    "title": "C4 context and containers",
+    "path": "project-context/10k/technical/architecture/c4-context-containers.md",
+    "shortDescription": "Who uses the Peak member dashboard, which external systems feed it, and its single-process FastAPI + vanilla JS + SQLite-backed store shape.",
+    "tags": [
+      "architecture",
+      "wearables",
+      "biomarkers"
+    ]
+  },
+  {
+    "title": "Project structure",
+    "path": "project-context/10k/technical/project-structure.md",
+    "shortDescription": "Where code, client, seed data, scripts and tests live in the Peak dashboard repo, and how to run, test, lint and benchmark it.",
+    "tags": [
+      "codebase"
+    ]
+  }
+]
