@@ -9,6 +9,8 @@ Task 1 of the brief. Members can already see their latest blood results on the h
 
 ## What's here
 - Brief: [TASK_1.md](/TASK_1.md)
+- API shape (u2, decision d1): [history-api-shape](shaping-content/history-api-shape.md)
+- Bench spike: [spikes/history-endpoint-bench](spikes/history-endpoint-bench/README.md)
 
 ## Related
 - [Business constraints](/project-context/10k/business-constraints.md)

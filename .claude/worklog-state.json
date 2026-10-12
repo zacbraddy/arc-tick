@@ -1,7 +1,8 @@
 {
   "sessions": {
     "d35e97a1-abc5-499a-b585-4cce109e5738": 0,
-    "5ac4f361-c278-4332-875b-018ef77a92d9": 1
+    "5ac4f361-c278-4332-875b-018ef77a92d9": 1,
+    "e6e2ef57-5cdd-4731-8112-d5d273bc6b62": 2
   },
   "rows": [
     {
@@ -13,6 +14,11 @@
       "start": 1791812280000,
       "finish": 1791812520000,
       "description": "ideate: fast-tracked TASK_1 to shaping/biomarker-history with 5 unknowns + 4 knowns, deleted raw"
+    },
+    {
+      "start": 1791813780000,
+      "finish": 1791814020000,
+      "description": "Shaped biomarker-history: benched API options, chose per-biomarker history endpoint, gated ready-for-planning"
     }
   ]
 }

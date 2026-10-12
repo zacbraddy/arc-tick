@@ -1,16 +1,11 @@
 {
-  "status": "active",
-  "statusNote": "",
+  "status": "ready-for-planning",
+  "statusNote": "API shape proven by bench spike (d1), budget agreed; remaining unknowns are cheap planning-level UI/edge-case picks or Task 2's",
   "unknowns": [
     {
       "id": "u1",
       "question": "What's the thinnest end-to-end slice that meets every Task 1 requirement in ~20 min?",
       "approach": "Cut layout/interaction to the minimum that's still inspectable and not a table"
-    },
-    {
-      "id": "u2",
-      "question": "Extend GET /api/home or add a per-biomarker history endpoint, within the 35 ms p95 budget (incl. after wearable import)?",
-      "approach": "Run scripts/bench.py against both options"
     },
     {
       "id": "u3",
@@ -26,6 +21,11 @@
       "id": "u5",
       "question": "How do we handle a single draw, gaps, missing or one-sided ranges, and a member with no results?",
       "approach": "Survey data/biomarkers for real cases"
+    },
+    {
+      "id": "u6",
+      "question": "Will Task 2 wearable persistence write into results:{id}? If so, history reads pay for wearable docs",
+      "approach": "Decide in Task 2 shaping; prefer a separate partition"
     }
   ],
   "knowns": [
@@ -48,9 +48,21 @@
       "id": "k4",
       "fact": "Store API frozen, /api/home <=35 ms p95, app/auth.py unchanged, ~20 min budget for Task 1",
       "source": "/project-context/10k/business-constraints.md"
+    },
+    {
+      "id": "k5",
+      "fact": "Add GET /api/biomarkers/{id}/history; leave /api/home alone. At 50 draws, inline history puts home p95 at 55 ms (over 35); the per-biomarker endpoint is 10.5 ms and home stays at 3.5 ms",
+      "source": "shaping-content/history-api-shape.md",
+      "answers": "Extend GET /api/home or add a per-biomarker history endpoint, within the 35 ms p95 budget (incl. after wearable import)?"
     }
   ],
-  "decisions": [],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Per-biomarker history endpoint (GET /api/biomarkers/{id}/history), /api/home unchanged — inlining history goes over the home budget at ~35+ draws; the endpoint pattern carries over to Task 2",
+      "evidence": "shaping-content/history-api-shape.md"
+    }
+  ],
   "lineage": [
     {
       "date": "2026-10-12",
@@ -59,6 +71,14 @@
     {
       "date": "2026-10-12",
       "event": "from raw: TASK_1.md (fast-tracked to shaping)"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "decided: Per-biomarker history endpoint (GET /api/biomarkers/{id}/history), /api/home unchanged — inlining history goes over the home budget at ~35+ draws; the endpoint pattern carries over to Task 2"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "status → ready-for-planning: API shape proven by bench spike (d1), budget agreed; remaining unknowns are cheap planning-level UI/edge-case picks or Task 2's"
     }
   ],
   "type": "technical"

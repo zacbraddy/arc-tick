@@ -8,5 +8,24 @@
       "constraints",
       "performance"
     ]
+  },
+  {
+    "title": "History API shape bake-off",
+    "path": "project-context/shaping/biomarker-history/shaping-content/history-api-shape.md",
+    "shortDescription": "u2 answer. A per-biomarker history endpoint beats inlining history in /api/home, which goes over the 35 ms budget at 50 draws",
+    "tags": [
+      "biomarkers",
+      "performance",
+      "data-store"
+    ]
+  },
+  {
+    "title": "History endpoint bench spike",
+    "path": "project-context/shaping/biomarker-history/spikes/history-endpoint-bench/README.md",
+    "shortDescription": "Throwaway bake-off of /api/home with inline history against a per-biomarker history endpoint",
+    "tags": [
+      "biomarkers",
+      "performance"
+    ]
   }
 ]
