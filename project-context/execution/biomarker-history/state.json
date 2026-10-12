@@ -86,6 +86,11 @@
       "id": "d4",
       "decision": "Inline expandable chart under each marker card, not a modal or detail route",
       "evidence": "plan.md"
+    },
+    {
+      "id": "d5",
+      "decision": "Flat route module (app/routes/history.py) with a pure history_points function; no domain/service layer — one filter over one partition doesn't pay for an extra layer in this epic",
+      "evidence": "c4/4-code.md"
     }
   ],
   "lineage": [
@@ -128,6 +133,14 @@
     {
       "date": "2026-10-12",
       "event": "decided: Inline expandable chart under each marker card, not a modal or detail route"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "decided: Flat route module (app/routes/history.py) with a pure history_points function; no domain/service layer — one filter over one partition doesn't pay for an extra layer in this epic"
+    },
+    {
+      "date": "2026-10-12",
+      "event": "moved planning → execution"
     }
   ],
   "type": "technical"

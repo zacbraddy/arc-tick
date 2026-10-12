@@ -12,6 +12,7 @@ Delivers Task 1: members open a chart of any biomarker's history from the home s
 - Bench spike: [history-endpoint-bench](origins/biomarker-history/spikes/history-endpoint-bench/README.md)
 - Data survey (u2, u4: ranges and edge cases): [data-survey](data-survey.md)
 - Plan (scope, slices, tests, risks): [plan](plan.md)
+- C4: [context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md), [code](c4/4-code.md)
 
 ## Related
 - [Task 1 brief](/TASK_1.md)

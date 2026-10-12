@@ -1,1 +1,88 @@
-[]
+[
+  {
+    "title": "Biomarker history C4 level 1 (context)",
+    "path": "project-context/execution/biomarker-history/c4/1-context.md",
+    "shortDescription": "System context for the biomarker history epic. Nothing new at this level; the member gets a new capability inside the existing dashboard",
+    "tags": [
+      "architecture",
+      "biomarkers"
+    ]
+  },
+  {
+    "title": "Biomarker history C4 level 2 (containers)",
+    "path": "project-context/execution/biomarker-history/c4/2-containers.md",
+    "shortDescription": "The browser client and API change; the document store and its frozen public API do not. History is a separate lazy request, so /api/home stays on budget",
+    "tags": [
+      "architecture",
+      "biomarkers",
+      "performance"
+    ]
+  },
+  {
+    "title": "Biomarker history C4 level 3 (components)",
+    "path": "project-context/execution/biomarker-history/c4/3-components.md",
+    "shortDescription": "Components inside the API and browser client that the history epic adds or changes, and the existing ones it leans on",
+    "tags": [
+      "architecture",
+      "biomarkers"
+    ]
+  },
+  {
+    "title": "Biomarker history C4 level 4 (code)",
+    "path": "project-context/execution/biomarker-history/c4/4-code.md",
+    "shortDescription": "Modules, types and functions the history epic adds or changes, with responsibilities and the tests that drive them",
+    "tags": [
+      "architecture",
+      "biomarkers",
+      "codebase"
+    ]
+  },
+  {
+    "title": "Biomarker data survey",
+    "path": "project-context/execution/biomarker-history/data-survey.md",
+    "shortDescription": "What data/biomarkers actually contains for history charts — range drift across draws and which edge cases are real",
+    "tags": [
+      "biomarkers"
+    ]
+  },
+  {
+    "title": "History API shape bake-off",
+    "path": "project-context/execution/biomarker-history/origins/biomarker-history/shaping-content/history-api-shape.md",
+    "shortDescription": "u2 answer. A per-biomarker history endpoint beats inlining history in /api/home, which goes over the 35 ms budget at 50 draws",
+    "tags": [
+      "biomarkers",
+      "performance",
+      "data-store"
+    ]
+  },
+  {
+    "title": "History endpoint bench spike",
+    "path": "project-context/execution/biomarker-history/origins/biomarker-history/spikes/history-endpoint-bench/README.md",
+    "shortDescription": "Throwaway bake-off of /api/home with inline history against a per-biomarker history endpoint",
+    "tags": [
+      "biomarkers",
+      "performance"
+    ]
+  },
+  {
+    "title": "Biomarker history plan",
+    "path": "project-context/execution/biomarker-history/plan.md",
+    "shortDescription": "Scope, thin vertical slices, test strategy, risks and candidate ADRs for Task 1's biomarker history chart",
+    "tags": [
+      "biomarkers",
+      "architecture",
+      "constraints",
+      "performance"
+    ]
+  },
+  {
+    "title": "Biomarker history",
+    "path": "project-context/execution/biomarker-history/README.md",
+    "shortDescription": "Epic for Task 1. Per-biomarker history endpoint and an inspectable chart against reference ranges, reachable from home",
+    "tags": [
+      "biomarkers",
+      "constraints",
+      "performance"
+    ]
+  }
+]
