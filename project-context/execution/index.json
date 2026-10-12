@@ -84,5 +84,50 @@
       "constraints",
       "performance"
     ]
+  },
+  {
+    "title": "History endpoint",
+    "path": "project-context/execution/biomarker-history/stories/01-history-endpoint.md",
+    "shortDescription": "GET /api/biomarkers/{id}/history returns the signed-in member's points for one biomarker, oldest first, with as-at-draw ranges",
+    "tags": [
+      "biomarkers",
+      "codebase"
+    ]
+  },
+  {
+    "title": "Inline history chart",
+    "path": "project-context/execution/biomarker-history/stories/02-inline-history-chart.md",
+    "shortDescription": "History toggle on each marker card expands into a Chart.js line with inspectable tooltips and an empty state",
+    "tags": [
+      "biomarkers",
+      "codebase"
+    ]
+  },
+  {
+    "title": "As-at-draw range bands",
+    "path": "project-context/execution/biomarker-history/stories/03-as-at-draw-range-bands.md",
+    "shortDescription": "Stepped improve/good/optimal bands behind the history line, each draw using its own as-at-draw ranges",
+    "tags": [
+      "biomarkers",
+      "codebase"
+    ]
+  },
+  {
+    "title": "NOTES.md",
+    "path": "project-context/execution/biomarker-history/stories/04-notes-md.md",
+    "shortDescription": "Task 1's required note of assumptions, edge-case guards and known limitations",
+    "tags": [
+      "biomarkers",
+      "constraints"
+    ]
+  },
+  {
+    "title": "Extras: screen-reader list and home bench",
+    "path": "project-context/execution/biomarker-history/stories/05-extras-sr-list-and-home-bench.md",
+    "shortDescription": "Optional polish. Screen-reader list of history points and a bench check that /api/home p95 hasn't moved",
+    "tags": [
+      "biomarkers",
+      "performance"
+    ]
   }
 ]

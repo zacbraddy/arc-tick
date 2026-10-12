@@ -5,7 +5,8 @@
     "e6e2ef57-5cdd-4731-8112-d5d273bc6b62": 2,
     "9cc1b0b0-beca-400b-90e7-c791fe208956": 3,
     "8d92d7c3-a79e-4f80-b666-cf53d8e218a6": 4,
-    "35b942a3-6a83-445f-abdb-401644591d02": 5
+    "35b942a3-6a83-445f-abdb-401644591d02": 5,
+    "2f6628f2-0ec6-4fc0-83b2-0646b5cf9d31": 6
   },
   "rows": [
     {
@@ -37,6 +38,11 @@
       "start": 1791815640000,
       "finish": 1791815700000,
       "description": "plan-epic: Drew C4 levels 1-4 for biomarker-history, recorded d5 (no domain layer), sent to stage-gate for execution"
+    },
+    {
+      "start": 1791816000000,
+      "finish": 1791816120000,
+      "description": "break-down-epic: biomarker-history sliced into 5 draft stories on epic/biomarker-history"
     }
   ]
 }

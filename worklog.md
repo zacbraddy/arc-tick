@@ -14,3 +14,4 @@ Times are captured automatically from the system clock: start times round up to 
 | 4 | 2026-10-12 | 15:14 | 15:17 | 3 | 20 | plan-epic: created technical epic biomarker-history, merged shaping item, reordered planning unknowns |
 | 5 | 2026-10-12 | 15:20 | 15:26 | 6 | 26 | plan-epic: data survey + edge-case table (u2/u4), chose inline-expand chart and 3-slice build (u1/u3), wrote plan.md |
 | 6 | 2026-10-12 | 15:34 | 15:35 | 1 | 27 | plan-epic: Drew C4 levels 1-4 for biomarker-history, recorded d5 (no domain layer), sent to stage-gate for execution |
+| 7 | 2026-10-12 | 15:40 | 15:42 | 2 | 29 | break-down-epic: biomarker-history sliced into 5 draft stories on epic/biomarker-history |
